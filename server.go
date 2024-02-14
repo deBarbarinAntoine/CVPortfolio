@@ -2,13 +2,12 @@ package CVPortfolio
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 	"path/filepath"
 	"runtime"
 )
 
-var tmpl *template.Template
+var tmpl, _ = template.ParseFiles(path + "templates/index.gohtml")
 
 var (
 	_, b, _, _ = runtime.Caller(0)
@@ -29,11 +28,6 @@ func runServer() {
 
 // Run is the public function that executes all necessary functions to run the server and website.
 func Run() {
-	var err error
-	tmpl, err = template.ParseFiles(path + "templates/index.gohtml")
-	if err != nil {
-		log.Fatal(err)
-	}
 	routes()
 	fileServer()
 	runServer()
